@@ -15,5 +15,11 @@ class Recipe extends Model
         'pdf_path',
         'views',
         'downloads',
+        'category_id',  
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

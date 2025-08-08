@@ -60,6 +60,14 @@ return [
             'report' => false,
         ],
 
+        //PDF FAJLOVI
+        'private' => [
+        'driver' => 'local',
+        'root' => storage_path('app/private'),
+        'visibility' => 'private',
+        'throw' => false,
+    ],
+
     ],
 
     /*

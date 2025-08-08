@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\DownloadController;
 
 //Rute za korisnike
 Route::get('/users', [UserController::class, 'index']);
@@ -31,6 +32,19 @@ Route::get('/recipes/{id}', [RecipeController::class, 'show']);
 Route::post('/recipes', [RecipeController::class, 'store']);
 Route::put('/recipes/{id}', [RecipeController::class, 'update']);
 Route::delete('/recipes/{id}', [RecipeController::class, 'destroy']);
+
+Route::middleware('auth:sanctum')->group(function () { //MOZETE DA MODIFIKUJETE DA SE I ODMAH PREUZIMA ALI KAZE CHAT DA JE BEZBEDNIJE OVAKO 
+    // Generiši kratkotrajni (signed) link – važi npr. 5 min
+    Route::post('/recipes/{recipe}/download-link', [DownloadController::class, 'generateLink']);
+
+    // 2) Preuzmi fajl preko signed rute (mora i dalje Bearer token)
+    Route::get('/downloads/recipes/{recipe}', [DownloadController::class, 'download'])
+        ->name('downloads.recipe');
+});
+
+
+
+
 
 //Rute za autentifikaciju
 Route::post('/login', [AuthController::class, 'login']);

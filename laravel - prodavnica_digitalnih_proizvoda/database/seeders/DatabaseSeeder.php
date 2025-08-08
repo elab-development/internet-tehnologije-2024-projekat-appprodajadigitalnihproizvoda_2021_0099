@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
         $user = User::factory(5)->create();
 
         // Kreiranje kategorija torti
-        $category1 = Category::create([
+        $category1 = Category::firstOrCreate([
             'name' => 'Čokoladne',
             'description' => 'Bogate i ukusne čokoladne torte za svaku priliku.'
         ]);
 
-        $category2 = Category::create([
+        $category2 = Category::firstOrCreate([
             'name' => 'Voćne',
             'description' => 'Sveže i lagane voćne torte sa ukusnim filovima.'
         ]);
 
-        $category3 = Category::create([
+        $category3 = Category::firstOrCreate([
             'name' => 'Posne',
             'description' => 'Posne torte pripremljene bez mlečnih proizvoda i jaja.'
         ]);

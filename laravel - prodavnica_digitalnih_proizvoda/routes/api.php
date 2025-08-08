@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\API\AuthController;
 
 //Rute za korisnike
 Route::get('/users', [UserController::class, 'index']);
@@ -27,3 +28,7 @@ Route::post('/recipes', [RecipeController::class, 'store']);
 Route::put('/recipes/{id}', [RecipeController::class, 'update']);
 Route::delete('/recipes/{id}', [RecipeController::class, 'destroy']);
 
+//Rute za autentifikaciju
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
